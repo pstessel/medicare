@@ -1,76 +1,40 @@
 # ui.R
 
 shinyUI(fluidPage(
-  titlePanel("Basic widgets"),
-  
-  fluidRow(
-    
-    column(3,
-           h3("Buttons"),
-           actionButton("action", label = "Action"),
-           br(),
-           br(), 
-           submitButton("Submit")),
-    
-    column(3,
-           h3("Single checkbox"),
-           checkboxInput("checkbox", label = "Choice A", value = TRUE)),
-    
-    column(3, 
-           checkboxGroupInput("checkGroup", 
-                              label = h3("Checkbox group"), 
-                              choices = list("Choice 1" = 1, 
-                                             "Choice 2" = 2, "Choice 3" = 3),
-                              selected = 1)),
-    
-    column(3, 
-           dateInput("date", 
-                     label = h3("Date input"), 
-                     value = "2014-01-01"))   
-  ),
-  
-  fluidRow(
-    
-    column(3,
-           dateRangeInput("dates", label = h3("Date range"))),
-    
-    column(3,
-           fileInput("file", label = h3("File input"))),
-    
-    column(3, 
-           h3("Help text"),
-           helpText("Note: help text isn't a true widget,", 
-                    "but it provides an easy way to add text to",
-                    "accompany other widgets.")),
-    
-    column(3, 
-           numericInput("num", 
-                        label = h3("Numeric input"), 
-                        value = 1))   
-  ),
-  
-  fluidRow(
-    
-    column(3,
-           radioButtons("radio", label = h3("Radio buttons"),
-                        choices = list("Choice 1" = 1, "Choice 2" = 2,
-                                       "Choice 3" = 3),selected = 1)),
-    
-    column(3,
-           selectInput("select", label = h3("Select box"), 
-                       choices = list("Choice 1" = 1, "Choice 2" = 2,
-                                      "Choice 3" = 3), selected = 1)),
-    
-    column(3, 
-           sliderInput("slider1", label = h3("Sliders"),
-                       min = 0, max = 100, value = 50),
-           sliderInput("slider2", "",
-                       min = 0, max = 100, value = c(25, 75))
-    ),
-    
-    column(3, 
-           textInput("text", label = h3("Text input"), 
-                     value = "Enter text..."))   
+  titlePanel("My Shiny App"),
+  sidebarLayout(position = "left",
+    sidebarPanel(
+      h1("Installation"),
+      p("Shiny is available on CRAN, so you can install it
+        in the usual way from your R console:"),
+      code("install.packages('Shiny')"),
+      br(),
+      br(),
+      br(),
+      br(),
+      img(src="bigorb.png", height = 100, width = 100),
+      "shiny is a product of",
+      span("RStudio", style = "color:blue")
+),
+    mainPanel(
+      h1("Introducing Shiny"),
+      p("Shiny is a new package from RStudio that makes it", 
+        span("incredibly easy", style = "font-style:italic"),
+        "to build interactive web applications with R."),
+      p("For an introduction and live examples, visit the",
+        a("Shiny homepage.",
+          href = "http://www.rstudio.com/shiny")),
+      br(),
+      h1("Features"),
+      tags$ul(
+        tags$li("Build useful web applications with only a 
+                few lines of code--no JavaScript required."), 
+        tags$li("Shiny applications are automatically 'live'
+                in the same way that",
+                span("spreadsheets", style = "font-style:bold"),
+                "are live. Outputs change instantly as users modify
+                inputs, without requiring a reload of the browser.")
+      )
+    )
   )
-  
 ))
