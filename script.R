@@ -33,13 +33,16 @@ names(ds)
 o_names <- names(med_all)
 n_names <- c("drg_definition", "provider_id", 
              "provider_name", "provider_street_address", 
-             "provider_city", "provider_state", "provider_zip code", 
+             "provider_city", "provider_state", "provider_zip", 
              "hospital_referral_region", "total_discharges", "avg_covered_charges", 
              "avg_total_payments", "avg_medicare_payments", "year")
 setnames(ds, o_names, n_names)
+
+ds$provider_zip <- ifelse(nchar(ds$provider_zip)==4,(paste("0",ds$provider_zip, sep="")), ds$provider_zip)
 
 # extract unique providers to a new dataset for geocoding
 setkey(ds, provider_id)
 # unique addresses are determined by the key, "provider_id"
 uniqaddresses <- subset(unique(ds))
 write.csv(uniqaddresses, "uniqaddresses.csv")
+
